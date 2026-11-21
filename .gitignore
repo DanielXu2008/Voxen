@@ -1,0 +1,33 @@
+# CMake build output
+build/
+out/
+CMakeUserPresets.json
+
+# Compiler and linker output (from building by hand with cl / nvcc)
+*.exe
+*.obj
+*.o
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.idb
+
+# CUDA intermediate files (nvcc --keep)
+*.ptx
+*.cubin
+*.fatbin
+*.ii
+*.cudafe*
+
+# Visual Studio
+.vs/
+*.user
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Kiro
+/.kiro/
