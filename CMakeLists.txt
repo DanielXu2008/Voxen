@@ -14,3 +14,4 @@ set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Wno-deprecated-gpu-targets")
 # Smoke tests
 add_executable(hello smoke/hello.cpp)
 add_executable(hello_cuda smoke/hello.cu)
+add_executable(gen_tone tools/gen_tone.cpp)
