@@ -6,11 +6,14 @@ class GpuFft {
 public:
     explicit GpuFft(int n);
     ~GpuFft();
+    
 
-    void forwardDevice(std::complex<float>* d_in, std::complex<float>* d_out);
-    void forward(std::complex<float>* in, std::complex<float>* out);
+    void forwardDevice(const std::complex<float>* d_in, std::complex<float>* d_out);
+    void forward(const std::complex<float>* in, std::complex<float>* out);
 
 private:
+    void release() noexcept;
+
     int n_ = 0;
     std::size_t bytes_ = 0;
     
