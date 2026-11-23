@@ -15,3 +15,9 @@ set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Wno-deprecated-gpu-targets")
 add_executable(hello smoke/hello.cpp)
 add_executable(hello_cuda smoke/hello.cu)
 add_executable(gen_tone tools/gen_tone.cpp)
+
+# DSP Library 
+find_package(CUDAToolkit REQUIRED)
+add_library(voxen_dsp STATIC src/fft.cu)
+target_include_directories(voxen_dsp PUBLIC src)
+target_link_libraries(voxen_dsp PUBLIC CUDA::cudart)
