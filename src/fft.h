@@ -7,6 +7,7 @@ public:
     explicit GpuFft(int n);
     ~GpuFft();
     
+    int size() const noexcept { return n_; }
 
     void forwardDevice(const std::complex<float>* d_in, std::complex<float>* d_out);
     void forward(const std::complex<float>* in, std::complex<float>* out);
