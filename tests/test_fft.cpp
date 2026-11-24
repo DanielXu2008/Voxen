@@ -6,6 +6,7 @@
 #include <iostream>
 #include <numbers>
 #include <vector>
+#include <fstream>
 
 int main() {
     constexpr int N = 4096;                  // Power-of-2 FFT size
@@ -15,9 +16,10 @@ int main() {
     // 1. Generate a pure Middle C sine wave: x[n] = sin(2 * pi * f * n / fs)
     std::vector<std::complex<float>> signal(N);
     for (int n = 0; n < N; ++n) {
+        const float w = (1.0f - std::cos(2.0f * std::numbers::pi_v<float> * n / N)); // Hann window
         const float t = static_cast<float>(n) / sampleRate;
         const float sample = std::sin(2.0f * std::numbers::pi_v<float> * middleC * t);
-        signal[n] = {sample, 0.0f};
+        signal[n] = {sample * w, 0.0f};
     }
 
     // 2. Run the GPU FFT
@@ -44,6 +46,11 @@ int main() {
     std::cout << "Expected bin : " << expectedBin << " (" << expectedBin * binWidth << " Hz)\n";
     std::cout << "Detected bin : " << peakBin << " (" << detectedFreq << " Hz)\n";
     std::cout << "Peak magnitude: " << peakMag << " (ideal ~ " << N / 2.0f << ")\n";
+    
+    std::ofstream csv("spectrum.csv");
+    csv << "freq,mag\n";
+    for (int k = 0; k <= N / 2; ++k)
+        csv << k * sampleRate / N << ',' << std::abs(spectrum[k]) << '\n';
 
     // 4. Verify the peak is in the right bin and has strong energy
     if (peakBin != expectedBin || peakMag < (N / 2.0f) * 0.5f) {
