@@ -16,7 +16,7 @@ int main() {
     // 1. Generate a pure Middle C sine wave: x[n] = sin(2 * pi * f * n / fs)
     std::vector<std::complex<float>> signal(N);
     for (int n = 0; n < N; ++n) {
-        const float w = (1.0f - std::cos(2.0f * std::numbers::pi_v<float> * n / N)); // Hann window
+        const float w = 0.5 * (1.0f - std::cos(2.0f * std::numbers::pi_v<float> * n / N)); // Hann window
         const float t = static_cast<float>(n) / sampleRate;
         const float sample = std::sin(2.0f * std::numbers::pi_v<float> * middleC * t);
         signal[n] = {sample * w, 0.0f};
