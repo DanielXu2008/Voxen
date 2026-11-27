@@ -21,6 +21,8 @@ add_executable(test_fft tests/test_fft.cpp)
 target_link_libraries(test_fft PRIVATE voxen_dsp)
 add_executable(test_pitch tests/test_pitch.cpp) 
 target_link_libraries(test_pitch PRIVATE voxen_dsp)
+add_executable(test_hps tests/test_hps.cpp) 
+target_link_libraries(test_hps PRIVATE voxen_dsp)
 
 # DSP Library 
 find_package(CUDAToolkit REQUIRED)
