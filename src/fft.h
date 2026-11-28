@@ -1,4 +1,4 @@
-#include <cuda_runtime.h>
+#pragma once
 
 #include <complex>
 
